@@ -74,7 +74,7 @@ int main()
             printBoard(state);                              // prints board
             turns++;
             gameOver = winTest(state); // checks to see for winner
-            if (winTest(state))
+            if (gameOver)
             {
                 if (determineXY(turns - 1) == 'X')
                 {
@@ -85,7 +85,7 @@ int main()
                     printf("Player 2 wins!");
                 }
             }
-            if (turns == 9 && !winTest(state))
+            if (turns == 9 && !gameOver)
             { // checks to see if tie
                 printf("Tie game!");
             }
@@ -97,6 +97,8 @@ int main()
         printBoard(state);
         turns = 0;
         gameOver = false;
+        time_t t;
+        srand((unsigned)time(&t)); // generates random sequence based on system time
 
         // Plays out game for 9 turns
         while (turns < 9 && !gameOver)
@@ -104,8 +106,6 @@ int main()
             int A = 0; // tracks row
             int B = 0; // tracks column
             int player = 0;
-            time_t t;
-            srand((unsigned)time(&t)); // generates random sequence based on system time
 
             if (determineXY(turns) == 'X')
             {
@@ -135,19 +135,19 @@ int main()
             }
             else
             { // random computer move
-                A = rand() % 3;
-                B = rand() % 3;
+                A = rand() % 4;
+                B = rand() % 4;
 
                 while (!checkRange(A, B))
                 { // Makes sure that the moves correspond to spaces on the board
-                   A = rand() % 3;
-                   B = rand() % 3;
+                   A = rand() % 4;
+                   B = rand() % 4;
                 }
 
                 while (!checkValidity(getSelection(A, B), state))
                 { // Makes sure the desired space is empty before replacing the current token
-                    A = rand() % 3;
-                    B = rand() % 3;
+                    A = rand() % 4;
+                    B = rand() % 4;
                 }
             }
 
@@ -155,7 +155,7 @@ int main()
             printBoard(state);                              // prints board
             turns++;
             gameOver = winTest(state); // checks to see for winner
-            if (winTest(state))
+            if (gameOver)
             {
                 if (determineXY(turns - 1) == 'X')
                 {
@@ -163,13 +163,14 @@ int main()
                 }
                 else
                 {
-                    printf("Player 2 wins!");
+                    printf("Computer wins!");
                 }
             }
-            if (turns == 9 && !winTest(state))
+            if (turns == 9 && !gameOver)
             { // checks to see if tie
                 printf("Tie game!");
             }
+            printf("%d", turns);
         }
     }
 
