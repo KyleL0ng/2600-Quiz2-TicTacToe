@@ -7,7 +7,7 @@
 
 int intro();
 void printBoard(char state[]);
-char determineXY(int turns);
+char determineXO(int turns);
 bool checkRange(int A, int B);
 int getSelection(int A, int B);
 bool checkValidity(int selection, char state[]);
@@ -47,7 +47,7 @@ int main()
             int B = 0; // tracks column
             int player = 0;
 
-            if (determineXY(turns) == 'X')
+            if (determineXO(turns) == 'X')
             {
                 player = 1;
             }
@@ -70,13 +70,13 @@ int main()
                 scanf("%d %d", &A, &B);
             }
 
-            state[getSelection(A, B)] = determineXY(turns); // Sets token in gameboard space
+            state[getSelection(A, B)] = determineXO(turns); // Sets token in gameboard space
             printBoard(state);                              // prints board
             turns++;
             gameOver = winTest(state); // checks to see for winner
             if (gameOver)
             {
-                if (determineXY(turns - 1) == 'X')
+                if (determineXO(turns - 1) == 'X')
                 {
                     printf("Player 1 wins!");
                 }
@@ -107,7 +107,7 @@ int main()
             int B = 0; // tracks column
             int player = 0;
 
-            if (determineXY(turns) == 'X')
+            if (determineXO(turns) == 'X')
             {
                 player = 1;
             }
@@ -151,13 +151,13 @@ int main()
                 }
             }
 
-            state[getSelection(A, B)] = determineXY(turns); // Sets token in gameboard space
+            state[getSelection(A, B)] = determineXO(turns); // Sets token in gameboard space
             printBoard(state);                              // prints board
             turns++;
             gameOver = winTest(state); // checks to see for winner
             if (gameOver)
             {
-                if (determineXY(turns - 1) == 'X')
+                if (determineXO(turns - 1) == 'X')
                 {
                     printf("Player 1 wins!");
                 }
@@ -194,9 +194,9 @@ void printBoard(char state[])
     printf("The current status is:\n");
     printf("+-------------+\n | %c | %c | %c |\n+-------------+\n | %c | %c | %c |\n+-------------+\n | %c | %c | %c |\n+-------------+\n", state[0], state[1], state[2], state[3], state[4], state[5], state[6], state[7], state[8]);
 }
-char determineXY(int turns)
+char determineXO(int turns)
 {
-    char player; // tracks whether to add an X or Y
+    char player; // tracks whether to add an X or O
 
     if (turns % 2 == 0)
     {
@@ -204,7 +204,7 @@ char determineXY(int turns)
     }
     else
     {
-        player = 'Y';
+        player = 'O';
     }
 
     return player;
@@ -326,36 +326,36 @@ bool winTest(char state[])
         gameOver = true;
     }
 
-    // Y
-    if (state[0] == 'Y' && state[1] == 'Y' && state[2] == 'Y')
+    // O
+    if (state[0] == 'O' && state[1] == 'O' && state[2] == 'O')
     { // Top row X
         gameOver = true;
     }
-    else if (state[3] == 'Y' && state[4] == 'Y' && state[5] == 'Y')
+    else if (state[3] == 'O' && state[4] == 'O' && state[5] == 'O')
     { // Mid row X
         gameOver = true;
     }
-    else if (state[6] == 'Y' && state[7] == 'Y' && state[8] == 'Y')
+    else if (state[6] == 'O' && state[7] == 'O' && state[8] == 'O')
     { // Bot row X
         gameOver = true;
     }
-    else if (state[0] == 'Y' && state[3] == 'Y' && state[6] == 'Y')
+    else if (state[0] == 'O' && state[3] == 'O' && state[6] == 'O')
     { // L column X
         gameOver = true;
     }
-    else if (state[1] == 'Y' && state[4] == 'Y' && state[7] == 'Y')
+    else if (state[1] == 'O' && state[4] == 'O' && state[7] == 'O')
     { // Mid column X
         gameOver = true;
     }
-    else if (state[2] == 'Y' && state[5] == 'Y' && state[8] == 'Y')
+    else if (state[2] == 'O' && state[5] == 'O' && state[8] == 'O')
     { // R column X
         gameOver = true;
     }
-    else if (state[0] == 'Y' && state[4] == 'Y' && state[8] == 'Y')
+    else if (state[0] == 'O' && state[4] == 'O' && state[8] == 'O')
     { // Diag 1 X
         gameOver = true;
     }
-    else if (state[2] == 'Y' && state[4] == 'Y' && state[6] == 'Y')
+    else if (state[2] == 'O' && state[4] == 'O' && state[6] == 'O')
     { // Diag 2 X
         gameOver = true;
     }
