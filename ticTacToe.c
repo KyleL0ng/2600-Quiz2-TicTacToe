@@ -53,12 +53,12 @@ int main()
         printf("Player%d: make your move", player);
         scanf("%d %d", &A, &B);
 
-        while (!checkRange(A, B)) {
+        while (!checkRange(A, B)) { //Makes sure that the moves correspond to spaces on the board
             printf("invalid move");
             scanf("%d %d", &A, &B);
         }
 
-        while (!checkValidity(getSelection(A,B), state)) {
+        while (!checkValidity(getSelection(A,B), state)) { //Makes sure the desired space is empty before replacing the current token
             printf("invalid move");
             scanf("%d %d", &A, &B);
         }
