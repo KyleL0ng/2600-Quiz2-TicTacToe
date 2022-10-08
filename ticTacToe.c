@@ -170,7 +170,6 @@ int main()
             { // checks to see if tie
                 printf("Tie game!");
             }
-            printf("%d", turns);
         }
     }
 
