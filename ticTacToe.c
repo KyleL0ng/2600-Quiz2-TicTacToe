@@ -9,6 +9,7 @@ int intro();
 void printBoard(char state[]);
 char determineXY(int turns);
 bool checkRange(int A, int B);
+int getSelection(int A, int B);
 
 int main()
 {
@@ -56,51 +57,7 @@ int main()
             scanf("%d %d", &A, &B);
         }
 
-        if (A == 1)
-        {
-            if (B == 1)
-            {
-                state[0] = determineXY(turns);
-            }
-            else if (B == 2)
-            {
-                state[1] = determineXY(turns);
-            }
-            else if (B == 3)
-            {
-                state[2] = determineXY(turns);
-            }
-        }
-        else if (A == 2)
-        {
-            if (B == 1)
-            {
-                state[3] = determineXY(turns);
-            }
-            else if (B == 2)
-            {
-                state[4] = determineXY(turns);
-            }
-            else if (B == 3)
-            {
-                state[5] = determineXY(turns);
-            }
-        }
-        else if (A == 3)
-        {
-            if (B == 1)
-            {
-                state[6] = determineXY(turns);
-            }
-            else if (B == 2)
-            {
-                state[7] = determineXY(turns);
-            }
-            else if (B == 3)
-            {
-                state[8] = determineXY(turns);
-            }
-        }
+        state[getSelection(A, B)] = determineXY(turns);
         printBoard(state);
         turns++;
     }
@@ -160,4 +117,54 @@ bool checkRange(int A, int B)
         }
 
         return test;
+}
+
+int getSelection(int A, int B) {
+    int selection = -1;
+    if (A == 1)
+        {
+            if (B == 1)
+            {
+                selection = 0;
+            }
+            else if (B == 2)
+            {
+                selection = 1;
+            }
+            else if (B == 3)
+            {
+                selection = 2;
+            }
+        }
+        else if (A == 2)
+        {
+            if (B == 1)
+            {
+                selection = 3;
+            }
+            else if (B == 2)
+            {
+                selection = 4;
+            }
+            else if (B == 3)
+            {
+                selection = 5;
+            }
+        }
+        else if (A == 3)
+        {
+            if (B == 1)
+            {
+                selection = 6;
+            }
+            else if (B == 2)
+            {
+                selection = 7;
+            }
+            else if (B == 3)
+            {
+                selection = 8;
+            }
+        }
+        return selection;
 }
