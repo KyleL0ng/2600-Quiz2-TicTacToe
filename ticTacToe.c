@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 // Tic Tac Toe game in between 2 players or player vs computer
 
 int intro();
 void printBoard(char state[]);
 char determineXY(int turns);
+bool checkRange(int A, int B);
 
 int main()
 {
@@ -48,23 +50,8 @@ int main()
         }
         printf("Player%d: make your move", player);
         scanf("%d %d", &A, &B);
-        if (A > 3)
-        {
-            printf("invalid move");
-            scanf("%d %d", &A, &B);
-        }
-        if (A < 1)
-        {
-            printf("invalid move");
-            scanf("%d %d", &A, &B);
-        }
-        if (B > 3)
-        {
-            printf("invalid move");
-            scanf("%d %d", &A, &B);
-        }
-        if (B < 1)
-        {
+
+        while (!checkRange(A, B)) {
             printf("invalid move");
             scanf("%d %d", &A, &B);
         }
@@ -73,15 +60,7 @@ int main()
         {
             if (B == 1)
             {
-                // if (state[0] != ' ')
-                // {
-                //     printf("invalid move");
-                //     scanf("%d %d", &A, &B);
-                // }
-                // else
-                // {
-                    state[0] = determineXY(turns);
-               // }
+                state[0] = determineXY(turns);
             }
             else if (B == 2)
             {
@@ -166,4 +145,19 @@ char determineXY(int turns)
     }
 
     return player;
+}
+
+bool checkRange(int A, int B)
+{
+    bool test = false;
+    
+        if (!(A > 3) && !(A < 1))
+        {
+            if (!(B > 3) && !(B < 1))
+            {
+                test = true;
+            }
+        }
+
+        return test;
 }
