@@ -11,6 +11,7 @@ char determineXY(int turns);
 bool checkRange(int A, int B);
 int getSelection(int A, int B);
 bool checkValidity(int selection, char state[]);
+bool winTest(char state[]);
 
 int main()
 {
@@ -28,19 +29,19 @@ int main()
     int turns = 0;
     int x;
     int y;
+    bool gameOver = false;
 
     int choice = intro(); // Prompts user and stores game choice
-    // NEED to make choice do something
 
     // print current status of the board
     printBoard(state);
 
-    while (turns < 9)
+    //Plays out game for 9 turns
+    while (turns < 9 && !gameOver)
     {
         int A = 0; // tracks row
         int B = 0; // tracks column
         int player = 0;
-        char result[2];
 
         if (determineXY(turns) == 'X')
         {
@@ -63,16 +64,22 @@ int main()
             scanf("%d %d", &A, &B);
         }
 
-        state[getSelection(A, B)] = determineXY(turns);
-        printBoard(state);
+        state[getSelection(A, B)] = determineXY(turns); //Sets token in gameboard space
+        printBoard(state); //prints board
         turns++;
+        gameOver = winTest(state); //checks to see for winner
+        if (winTest(state)) {
+            if (determineXY(turns-1) == 'X') {
+                printf("Player 1 wins!");
+            }
+            else {
+                printf("Player 2 wins!");
+            }
+        }
+        if (turns == 9 && !winTest(state)) { //checks to see if tie
+            printf("Tie game!");
+        } 
     }
-
-    // prompt player/computer to make their move
-
-    // print out new status
-
-    // repeat
 
     return 0;
 }
@@ -183,4 +190,62 @@ bool checkValidity(int selection, char state[]) {
         }
     
     return test;
+}
+
+bool winTest(char state[]) {
+    bool gameOver = false;
+
+    //X
+    if (state[0] == 'X' && state[1] == 'X' && state[2] == 'X') { //Top row X
+        gameOver = true;
+    }
+    else if (state[3] == 'X' && state[4] == 'X' && state[5] == 'X') { //Mid row X
+        gameOver = true;
+    }
+    else if (state[6] == 'X' && state[7] == 'X' && state[8] == 'X') { //Bot row X
+        gameOver = true;
+    }
+    else if (state[0] == 'X' && state[3] == 'X' && state[6] == 'X') { //L column X
+        gameOver = true;
+    }
+    else if (state[1] == 'X' && state[4] == 'X' && state[7] == 'X') { //Mid column X
+        gameOver = true;
+    }
+    else if (state[2] == 'X' && state[5] == 'X' && state[8] == 'X') { //R column X
+        gameOver = true;
+    }
+    else if (state[0] == 'X' && state[4] == 'X' && state[8] == 'X') { //Diag 1 X
+        gameOver = true;
+    }
+    else if (state[2] == 'X' && state[4] == 'X' && state[6] == 'X') { //Diag 2 X
+        gameOver = true;
+    }
+
+    //Y
+    if (state[0] == 'Y' && state[1] == 'Y' && state[2] == 'Y') { //Top row X
+        gameOver = true;
+    }
+    else if (state[3] == 'Y' && state[4] == 'Y' && state[5] == 'Y') { //Mid row X
+        gameOver = true;
+    }
+    else if (state[6] == 'Y' && state[7] == 'Y' && state[8] == 'Y') { //Bot row X
+        gameOver = true;
+    }
+    else if (state[0] == 'Y' && state[3] == 'Y' && state[6] == 'Y') { //L column X
+        gameOver = true;
+    }
+    else if (state[1] == 'Y' && state[4] == 'Y' && state[7] == 'Y') { //Mid column X
+        gameOver = true;
+    }
+    else if (state[2] == 'Y' && state[5] == 'Y' && state[8] == 'Y') { //R column X
+        gameOver = true;
+    }
+    else if (state[0] == 'Y' && state[4] == 'Y' && state[8] == 'Y') { //Diag 1 X
+        gameOver = true;
+    }
+    else if (state[2] == 'Y' && state[4] == 'Y' && state[6] == 'Y') { //Diag 2 X
+        gameOver = true;
+    }
+
+    return gameOver;
 }
