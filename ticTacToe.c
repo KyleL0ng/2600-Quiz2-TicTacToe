@@ -78,16 +78,16 @@ int main()
             {
                 if (determineXO(turns - 1) == 'X')
                 {
-                    printf("Player 1 wins!");
+                    printf("Player 1 wins!\n");
                 }
                 else
                 {
-                    printf("Player 2 wins!");
+                    printf("Player 2 wins!\n");
                 }
             }
             if (turns == 9 && !gameOver)
             { // checks to see if tie
-                printf("Tie game!");
+                printf("Tie game!\n");
             }
         }
     }
@@ -159,18 +159,28 @@ int main()
             {
                 if (determineXO(turns - 1) == 'X')
                 {
-                    printf("Player 1 wins!");
+                    printf("Player 1 wins!\n");
                 }
                 else
                 {
-                    printf("Computer wins!");
+                    printf("Computer wins!\n");
                 }
             }
             if (turns == 9 && !gameOver)
             { // checks to see if tie
-                printf("Tie game!");
+                printf("Tie game!\n");
             }
         }
+    }
+
+    printf("Do you want to play again?\n");
+    printf("1 --- play again\n");
+    printf("2 --- quit\n");
+    printf("Enter your choice (1 or 2):\n");
+    scanf("%d", &choice);
+
+    if (choice == 1) {
+        main();
     }
 
     return 0;
