@@ -10,6 +10,7 @@ void printBoard(char state[]);
 char determineXY(int turns);
 bool checkRange(int A, int B);
 int getSelection(int A, int B);
+bool checkValidity(int selection, char state[]);
 
 int main()
 {
@@ -53,6 +54,11 @@ int main()
         scanf("%d %d", &A, &B);
 
         while (!checkRange(A, B)) {
+            printf("invalid move");
+            scanf("%d %d", &A, &B);
+        }
+
+        while (!checkValidity(getSelection(A,B), state)) {
             printf("invalid move");
             scanf("%d %d", &A, &B);
         }
@@ -167,4 +173,14 @@ int getSelection(int A, int B) {
             }
         }
         return selection;
+}
+
+bool checkValidity(int selection, char state[]) {
+    bool test = false;
+
+        if (state[selection] == ' ') {
+            test = true;
+        }
+    
+    return test;
 }
